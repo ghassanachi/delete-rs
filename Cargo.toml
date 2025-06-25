@@ -1,0 +1,19 @@
+[package]
+name = "delete-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.40", features = ["derive", "env"] }
+eyre = "0.6.12"
+rand = "0.9.1"
+redis = "0.32.0"
+ulid = "1.2.1"
+url = "2.5.4"
+
+[profile.release]
+opt-level = "z"
+panic = "abort"
+codegen-units = 1
+lto = true
+strip = true
