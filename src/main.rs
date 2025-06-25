@@ -68,7 +68,7 @@ fn cleanup(conn: &mut Connection, keys: String, max_ttl: i64, commit: bool) -> e
         match (parts_iter.next(), parts_iter.last()) {
             (Some(prefix), Some(num)) if prefix == "bull" && num.parse::<usize>().is_err() => {
                 eprintln!(
-                    "===>[🛠️ MANAGED SKIPPING] Key({}, ttl: {ttl}) keys | ({i}/{num_keys}) | MANAGED KEY",
+                    "===>[🛠️ MANAGED SKIPPING] Key({}, ttl: {ttl}) keys | ({i}/{num_keys})",
                     key,
                 );
                 continue;
