@@ -88,7 +88,7 @@ fn cleanup(conn: &mut Connection, keys: String, max_ttl: i64, commit: bool) -> e
             key,
         );
 
-        if commit {
+        if commit && should_delete {
             let _: () = conn.del(key)?;
             eprintln!("===>[♲ DELETED]",);
         }
