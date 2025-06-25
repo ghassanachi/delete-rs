@@ -63,6 +63,19 @@ fn cleanup(conn: &mut Connection, keys: String, max_ttl: i64, commit: bool) -> e
     for (idx, key) in keys.iter().enumerate() {
         let i = idx + 1;
         let ttl: i64 = conn.ttl(key)?;
+
+        let mut parts_iter = key.split(":");
+        match (parts_iter.next(), parts_iter.last()) {
+            (Some(prefix), Some(num)) if prefix == "bull" && num.parse::<usize>().is_ok() => {
+                eprintln!(
+                    "===>[🚫 SKIPPING] Key({}, ttl: {ttl}) keys | ({i}/{num_keys}) | MANAGED KEY",
+                    key,
+                );
+            }
+            // In all other cases we continue;
+            _ => {}
+        }
+
         let should_delete = ttl <= max_ttl;
         eprintln!(
             "===>[{}] Key({}, ttl: {ttl}) keys | ({i}/{num_keys})",
