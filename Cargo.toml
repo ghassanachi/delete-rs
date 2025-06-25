@@ -8,6 +8,7 @@ clap = { version = "4.5.40", features = ["derive", "env"] }
 eyre = "0.6.12"
 rand = "0.9.1"
 redis = { version = "0.32.0", features = ["tls-rustls"] }
+rustls = { version = "0.23.28", features = ["ring"] }
 ulid = "1.2.1"
 url = "2.5.4"
 
