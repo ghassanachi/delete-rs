@@ -110,11 +110,6 @@ fn seed(
 }
 
 fn main() -> eyre::Result<()> {
-    // Setup the TLS support
-    let _ = rustls::crypto::ring::default_provider()
-        .install_default()
-        .expect("Failed to install rustls crypto provider");
-
     eprintln!("Starting Redis Cleanup");
     let cli = Cli::parse();
 
