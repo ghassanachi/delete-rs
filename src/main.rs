@@ -66,11 +66,12 @@ fn cleanup(conn: &mut Connection, keys: String, max_ttl: i64, commit: bool) -> e
 
         let mut parts_iter = key.split(":");
         match (parts_iter.next(), parts_iter.last()) {
-            (Some(prefix), Some(num)) if prefix == "bull" && num.parse::<usize>().is_ok() => {
+            (Some(prefix), Some(num)) if prefix == "bull" && num.parse::<usize>().is_err() => {
                 eprintln!(
-                    "===>[🚫 SKIPPING] Key({}, ttl: {ttl}) keys | ({i}/{num_keys}) | MANAGED KEY",
+                    "===>[🛠️ MANAGED SKIPPING] Key({}, ttl: {ttl}) keys | ({i}/{num_keys}) | MANAGED KEY",
                     key,
                 );
+                continue;
             }
             // In all other cases we continue;
             _ => {}
